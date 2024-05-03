@@ -145,7 +145,7 @@ const Navbar = ({ Bio }) => {
               Education
             </NavLink>
             <GithubButton
-              href={Bio.github}
+              href={Bio?.github}
               target="_Blank"
               style={{
                 background: theme.primary,
@@ -158,7 +158,7 @@ const Navbar = ({ Bio }) => {
         )}
 
         <ButtonContainer>
-          <GithubButton href={Bio.github} target="_Blank">
+          <GithubButton href={Bio?.github} target="_Blank">
             Github Profile
           </GithubButton>
         </ButtonContainer>

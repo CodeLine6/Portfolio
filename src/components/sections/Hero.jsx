@@ -7,10 +7,11 @@ import {
   headContentAnimation,
   headTextAnimation,
 } from "../../utils/motion";
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const HeroContainer = styled.div`
   display: flex;
-  justify-content: center;
   position: relative;
   align-items:center;
   z-index: 1;
@@ -43,10 +44,6 @@ const HeroLeftContainer = styled.div`
   @media (max-width: 960px) {
     order: 2;
     margin-bottom: 30px;
-    display: flex;
-    gap: 6px;
-    flex-direction: column;
-    align-items: center;
   }
 `;
 const HeroRightContainer = styled.div`
@@ -60,7 +57,7 @@ const HeroRightContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-contents: center;
-    margin-bottom: 80px;
+    margin:80px 0;
   }
 
   @media (max-width: 640px) {
@@ -95,9 +92,6 @@ const TextLoop = styled.div`
 
   @media (max-width: 960px) {
     text-align: center;
-  }
-
-  @media (max-width: 960px) {
     font-size: 22px;
     line-height: 48px;
     margin-bottom: 16px;
@@ -174,15 +168,11 @@ const ResumeButton = styled.a`
 
 const Img = styled.img`
   border-radius: 10%;
-  width: 100%;
-  height: 100%;
-  max-width: 400px;
-  max-height: 400px;
+  width: 400px;
   border: 2px solid ${({ theme }) => theme.primary};
 
   @media (max-width: 640px) {
     max-width: 280px;
-    max-height: 280px;
   }
 `;
 
@@ -190,30 +180,30 @@ const Hero = ({ Bio }) => {
   return (
     <div id="About" >
       <HeroContainer className="md:h-screen">
-
-        <motion.div {...headContainerAnimation}>
+        <motion.div className="w-full flex justify-center" {...headContainerAnimation}>
           <HeroInnerContainer>
             <HeroLeftContainer>
               <motion.div {...headTextAnimation}>
                 <Title>
-                  Hi, I am <br /> {Bio?.name}
+                  Hi, I am <br />
+                  {!Bio ? <Skeleton count={1} /> : Bio.name}
                 </Title>
                 <TextLoop>
                   I am a
                   <Span>
-                    <Typewriter
+                    {Bio ? <Typewriter
                       options={{
                         strings: Bio?.roles,
                         autoStart: true,
                         loop: true,
                       }}
-                    />
+                    /> : <Skeleton count={1} />}
                   </Span>
                 </TextLoop>
               </motion.div>
 
               <motion.div {...headContentAnimation}>
-                <SubTitle>{Bio?.description}</SubTitle>
+                <SubTitle>{Bio ? Bio.description : <Skeleton count={5} />}</SubTitle>
               </motion.div>
 
               <ResumeButton href={Bio?.resume} target="_blank">
@@ -223,7 +213,8 @@ const Hero = ({ Bio }) => {
             <HeroRightContainer>
               <motion.div {...headContentAnimation}>
                 <Tilt>
-                  <Img src={Bio?.image} alt="Maneet Chaudhary" />
+                  {Bio ? <Img src={Bio.image} alt="Maneet Chaudhary" /> :
+                    <Skeleton className="rounded-[10%] w-[200px] md:w-[400px] aspect-[1/1.3]" />}
                 </Tilt>
               </motion.div>
             </HeroRightContainer>

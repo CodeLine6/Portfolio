@@ -58,7 +58,8 @@ border-radius: 12px;
 font-weight 500;
 margin: 22px 0;
 @media (max-width: 768px){
-    font-size: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 `;
 
@@ -121,7 +122,7 @@ const Projects = ({ openModal, setOpenModal }) => {
           >
             ALL
           </ToggleButton>
-          {filters.map(filter => <span key={filter}>
+          {filters.map(filter => <div key={filter}>
             <Divider />
             <ToggleButton
               active={activeTab === filter}
@@ -129,8 +130,7 @@ const Projects = ({ openModal, setOpenModal }) => {
             >
               {filter}
             </ToggleButton>
-
-          </span>
+          </div>
           )}
         </ToggleButtonGroup>
         <CardContainer>

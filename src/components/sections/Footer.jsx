@@ -93,10 +93,10 @@ const Footer = ({ Bio }) => {
           <NavLink href="#Education">Education</NavLink>
         </Nav>
         <SocialMediaIcons>
-          <SocialMediaIcon href={Bio.twitter} target="display">
+          <SocialMediaIcon href={Bio?.twitter} target="display">
             <TwitterIcon />
           </SocialMediaIcon>
-          <SocialMediaIcon href={Bio.linkedin} target="display">
+          <SocialMediaIcon href={Bio?.linkedin} target="display">
             <LinkedInIcon />
           </SocialMediaIcon>
         </SocialMediaIcons>

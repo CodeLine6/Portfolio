@@ -41,7 +41,7 @@ const Wrapper = styled.div`
 
 function App() {
   const [openModal, setOpenModal] = useState({ state: false, project: null });
-  const [Bio, setBio] = useState({})
+  const [Bio, setBio] = useState(null)
 
   useLayoutEffect(() => {
     getBio().then(setBio)
