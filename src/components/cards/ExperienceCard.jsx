@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 
@@ -50,14 +50,6 @@ const Date = styled.div`
     font-size: 10px;
   }
 `;
-const Grade = styled.div`
-  font-size: 14px;
-  font-weight: 500;
-  color: ${({ theme }) => theme.text_secondary + 99};
-  @media only screen and (max-width: 768px) {
-    font-size: 12px;
-  }
-`;
 
 const Description = styled.div`
   width: 100%;
@@ -72,6 +64,10 @@ const Description = styled.div`
 const Span = styled.div`
   display: -webkit-box;
   max-width: 100%;
+  ul {
+    list-style: disc;
+    margin-left:10px
+  }
 `;
 const Skills = styled.div`
   width: 100%;
@@ -95,6 +91,10 @@ const ItemWrapper = styled.div`
 `;
 
 const ExperienceCard = ({ experience }) => {
+  const descriptionref = useRef(null)
+  useEffect(() => {
+    descriptionref.current.innerHTML = experience.description
+  }, [])
   return (
     <VerticalTimelineElement
       icon={
@@ -131,7 +131,7 @@ const ExperienceCard = ({ experience }) => {
         </Body>
       </Top>
       <Description>
-        {experience.description && <Span>{experience.description}</Span>}
+        <Span ref={descriptionref}></Span>
         {experience.skills && (
           <>
             <br />
