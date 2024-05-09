@@ -130,6 +130,14 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // validate form before submission
+    const validation = form.current.checkValidity();
+    if (!validation) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
     emailjs
       .sendForm(
         "service_12lczp1",
@@ -158,10 +166,10 @@ const Contact = () => {
         </Desc>
         <ContactForm ref={form} onSubmit={handleSubmit}>
           <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput placeholder="Your Email" name="from_email" />
-          <ContactInput placeholder="Your Name" name="from_name" />
-          <ContactInput placeholder="Subject" name="subject" />
-          <ContactInputMessage placeholder="Message" name="message" rows={4} />
+          <ContactInput required placeholder="Your Email" name="from_email" />
+          <ContactInput required min={3} placeholder="Your Name" name="from_name" />
+          <ContactInput required min={3} placeholder="Subject" name="subject" />
+          <ContactInputMessage required placeholder="Message" name="message" rows={4} />
           <ContactButton type="submit" value="Send" />
         </ContactForm>
       </Wrapper>
