@@ -2,6 +2,7 @@ import { CloseRounded, GitHub, LinkedIn } from "@mui/icons-material";
 import { Modal } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
+import PortableText from "react-portable-text"
 
 const Container = styled.div`
   width: 100%;
@@ -206,7 +207,9 @@ const ProjectDetails = ({ openModal, setOpenModal }) => {
               <Tag>{tag}</Tag>
             ))}
           </Tags>
-          <Desc>{project?.description}</Desc>
+          <Desc>
+            <PortableText content={project?.description} />
+          </Desc>
           {project.member && (
             <>
               <Label>Members</Label>

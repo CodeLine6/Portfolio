@@ -1,4 +1,5 @@
 import React from "react";
+import PortableText from "react-portable-text";
 import styled from "styled-components";
 
 const Card = styled.div`
@@ -28,11 +29,13 @@ const Image = styled.img`
 `;
 const Tags = styled.div`
   width: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
+  overflow-x:scroll;
+  white-space: nowrap;
   gap: 8px;
   margin-top: 4px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 const Tag = styled.div`
   font-size: 12px;
@@ -41,6 +44,8 @@ const Tag = styled.div`
   background-color: ${({ theme }) => theme.primary + 15};
   padding: 2px 8px;
   border-radius: 10px;
+  display: inline-block;
+  margin-right:4px
 `;
 const Details = styled.div`
   width: 100%;
@@ -105,7 +110,9 @@ const ProjectCard = ({ project, setOpenModal }) => {
       </Tags>
       <Details>
         <Title>{project.title}</Title>
-        <Description>{project.description}</Description>
+        <Description>
+          <PortableText content={project.description} />
+        </Description>
       </Details>
       <Members>
         {project.member?.map((member) => (
